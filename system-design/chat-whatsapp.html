@@ -1,0 +1,454 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Chat / WhatsApp - LeetCode &amp; System Design — Rust · C · C++ · Python</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Preparação para entrevista técnica: padrões de LeetCode em 4 linguagens + System Design narrado.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fuzzy-71d5254f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-6ecb1990.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-79a27dc0.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">LeetCode &amp; System Design — Rust · C · C++ · Python</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="chat--whatsapp"><a class="header" href="#chat--whatsapp">Chat / WhatsApp</a></h1>
+<blockquote>
+<p>Categoria: mensageria em tempo real · Dificuldade: avançado — a prova de
+fogo de quem já operou sistema a sério. As palavras que precisam sair da
+sua boca: <strong>sequência por conversa, store-and-forward, fan-out de grupo,
+receipts, presença</strong> — e cada uma com o porquê.</p>
+</blockquote>
+<h2 id="1-requisitos-10-min"><a class="header" href="#1-requisitos-10-min">1. Requisitos (10 min)</a></h2>
+<p><strong>Funcionais:</strong></p>
+<ul>
+<li>Mensagens 1:1 e em grupo (até ~1 mil membros), entregues em <strong>~100–300 ms</strong>
+quando o destinatário está online</li>
+<li>Presença: “online agora” e “última vez visto”</li>
+<li><strong>Ordem preservada POR CONVERSA</strong> — todos veem a mesma sequência</li>
+<li>Offline → recebe tudo ao reconectar (store-and-forward), sem perder, sem
+duplicar, na ordem</li>
+<li>Receipts: ✓ entregue / ✓✓ lida</li>
+<li>E2E encryption: só as pontas leem; o servidor transporta ciphertext</li>
+<li>Opcionais: “digitando…”, mídia (foto/áudio), push para o celular</li>
+</ul>
+<p><strong>Não-funcionais:</strong></p>
+<ul>
+<li>Escala de escrita pesada (~1:1 com leitura — raríssimo; redes sociais são
+100:1, chat é o inverso)</li>
+<li>Latência online &lt; 300 ms; <strong>durabilidade</strong>: mensagem confirmada não some</li>
+<li>Disponibilidade &gt; 99,9% — chat morto é produto morto</li>
+<li>Consistência: entrega única + ordem por conversa (nem global, nem casual)</li>
+</ul>
+<p><strong>Estimativas (guardanapo):</strong></p>
+<ul>
+<li>500 M DAU × 40 msgs/dia = 20 B msgs/dia ÷ 86.400 ≈ <strong>~230k msg/s média</strong>,
+pico 2–3× ≈ 500k/s</li>
+<li>1 KB por mensagem com overhead → 20 B × 1 KB ≈ <strong>20 TB/dia ≈ 7 PB/ano</strong> →
+shard obrigatório (com retenção, 5 anos ≈ 35 PB)</li>
+<li>Conexões simultâneas: 10% dos DAU ativos = 50 M WebSockets ≈ 20 KB por
+conexão = <strong>~1 TB de estado de conexão</strong> nos gateways (50–200 nós)</li>
+<li>Fan-out de grupo: média 50 membros; on-write puro → 230k × 50 ≈
+<strong>11,5 M entregas/s</strong> — o número que sozinho mata o on-write para grupos
+grandes</li>
+</ul>
+<h2 id="2-api--modelo-de-dados"><a class="header" href="#2-api--modelo-de-dados">2. API + modelo de dados</a></h2>
+<p>WebSocket para o fluxo em tempo real + REST para o catch-up:</p>
+<pre><code>WS  → {tipo:"msg", conversa_id, texto, client_seq}
+WS  ← {tipo:"ack",  conversa_id, server_seq}        # o servidor ordenou
+WS  → {tipo:"receipt", conversa_id, server_seq, tipo:"lida"}
+GET /conversas/{id}/mensagens?depois_seq=N          # reconnect / histórico
+POST /conversas/{id}/mídia                          # upload (metadado no DB)
+</code></pre>
+<pre><code class="language-sql">conversas(id, tipo '1:1'|'grupo', criada_em)
+membros(conversa_id, usuario_id, PK(conversa_id, usuario_id))
+mensagens(conversa_id, server_seq, remetente_id, texto, criada_em,
+          PRIMARY KEY (conversa_id, server_seq))    -- shard POR conversa
+entregas(conversa_id, server_seq, usuario_id, entregue_em, lida_em,
+         PRIMARY KEY (conversa_id, server_seq, usuario_id))   -- receipts
+presenca(usuario_id PK, estado, visto_em)           -- no Redis (TTL)
+</code></pre>
+<ul>
+<li><code>server_seq</code> é <strong>do servidor</strong>, nunca do cliente: atribuído pelo único
+escritor da conversa (o shard dela) — aí a ordem é comparável entre
+clientes. O <code>client_seq</code> do cliente só serve para dedupe (duplo envio).</li>
+<li>A PK <code>(conversa_id, server_seq)</code> torna o reenvio idempotente: same seq
+erro/upsert, nunca mensagem duplicada.</li>
+</ul>
+<h2 id="3-alto-nível"><a class="header" href="#3-alto-nível">3. Alto nível</a></h2>
+<pre><code>cliente → edge WS gateway (sticky) ──► serviço de mensagens (stateless)
+   ▲                                      │  valida e atribui server_seq
+   └───── entrega (WS/push) ←─────────────┤
+                                          ▼
+                              fila de entrega / notificação
+                                          │
+                                          ▼
+                     banco sharded por conversa (mensagens, entregas)
+                                          ▲
+                              workers de fan-out (grupos)
+   Redis: presença (TTL), cache de conversas quentes, contador de seq por
+   conversa (contador de só escrita — seq de verdade vive no shard)
+</code></pre>
+<ul>
+<li><strong>Gateway WS sticky</strong>: conexão tem estado (a thread que manda no socket);
+o reconnect cai no mesmo nó via L7 — estado do socket fora dos serviços.</li>
+<li><strong>Serviço de mensagens</strong>: sem estado de conexão — escala horizontal; é
+quem valida, ordena e escreve.</li>
+<li><strong>Fila de entrega</strong>: desacopla o pico de escrita (230k/s) da entrega ao
+destinatário; é o canal do store-and-forward e do push.</li>
+<li><strong>Banco sharded por conversa</strong>: todas as mensagens de uma conversa num
+shard só → a ordem é <code>ORDER BY server_seq</code> trivial, e o seq nasce lá.</li>
+<li><strong>Redis</strong>: presença e cache de calor; nunca é dono da verdade da ordem.</li>
+</ul>
+<h2 id="4-deep-dive-os-três-pontos-onde-a-vaga-é-ganha"><a class="header" href="#4-deep-dive-os-três-pontos-onde-a-vaga-é-ganha">4. Deep dive (os três pontos onde a vaga é ganha)</a></h2>
+<h3 id="a-ordenação-sequência-por-conversa-não-global"><a class="header" href="#a-ordenação-sequência-por-conversa-não-global">a) Ordenação: sequência POR conversa, não global</a></h3>
+<p>Requisito real: “todo mundo vê a mesma ordem <strong>naquela conversa</strong>”. Então o
+relógio é <strong>por conversa</strong> — um contador monotônico atribuído pelo escritor
+único daquela conversa (o shard dela). Por que não:</p>
+<ul>
+<li><strong>Timestamp do cliente</strong>: relógios mentem, ordem aleatória no merge.</li>
+<li><strong>Seq global</strong>: escala mal (um contador único = gargalo) e é inútil —
+mensagem da conversa A não compete com a da B.</li>
+<li><strong>Seq por (remetente, conversa)</strong>: serve só para dedupe local; não ordena
+os dois lados.</li>
+</ul>
+<p>O reconnect pede <code>depois_seq=N</code> e recebe em ordem crescente; o cliente exibe
+na ordem do <code>server_seq</code>, não na ordem de chegada do WebSocket (que pode
+embaralhar via retry de rede).</p>
+<pre><code class="language-python"># A regra em 20 linhas (testado): servidor atribui seq por conversa; offline
+# cai na caixa (store-and-forward); reconnect entrega em ordem; receipts
+# rastreiam entrega/leitura por (conversa, usuario).
+class SimuladorChat:
+    def __init__(self):
+        self.prox_seq = {}
+        self.caixas = {}            # (conversa, usuario) -&gt; [(seq, texto)]
+        self.ultimo_entregue = {}
+        self.ultimo_lido = {}
+
+    def enviar(self, conversa: str, texto: str, b_online: bool) -&gt; int:
+        seq = self.prox_seq.get(conversa, 0) + 1     # único escritor da conversa
+        self.prox_seq[conversa] = seq
+        chave = (conversa, "B")
+        if b_online:
+            self.ultimo_entregue[chave] = seq
+        else:
+            self.caixas.setdefault(chave, []).append((seq, texto))
+        return seq
+
+    def reconectar(self, conversa: str):
+        chave = (conversa, "B")
+        pendentes = self.caixas.pop(chave, [])
+        for seq, _ in pendentes:                     # ordem = ordem do seq
+            self.ultimo_entregue[chave] = seq
+        return pendentes
+
+    def marcar_lida(self, conversa: str, seq: int):
+        self.ultimo_lido[(conversa, "B")] = seq
+</code></pre>
+<h3 id="b-fan-out-de-grupo-write-vs-read-o-número-decide"><a class="header" href="#b-fan-out-de-grupo-write-vs-read-o-número-decide">b) Fan-out de grupo: write vs read (o número decide)</a></h3>
+<ul>
+<li><strong>On-write (cópia por destinatário)</strong>: gravar o post na “caixa” de cada
+membro → ler é O(1). Custo da escrita = O(membros): 230k × 50 ≈ 11,5M
+gravações/s, mesmo 100% assíncrono, aquece o banco.</li>
+<li><strong>On-read (1 cópia + pull)</strong>: a mensagem é única; cada membro busca/é
+notificado quando abre. Escrita O(1), leitura O(membros que puxaram).</li>
+<li><strong>Híbrido por threshold — a resposta de sênior</strong>:
+<ul>
+<li>grupos ≤ ~100 membros → <strong>on-write</strong> (caixa materializada por membro,
+leitura instantânea);</li>
+<li>grupos grandes (10k+; é o caso do WhatsApp) → <strong>on-read</strong>: cabeçalho
+único + ponteiro para a mensagem; o membro puxa o corpo ao abrir.</li>
+<li>O guardanapo vira o critério: diga o threshold e mostre a conta.</li>
+</ul>
+</li>
+<li>Receipts num grupo: escreve em <code>entregas</code> por membro (assimétrico —
+consequência honesta; batch por sessão de leitura).</li>
+</ul>
+<h3 id="c-store-and-forward-receipts-presença-e-e2e"><a class="header" href="#c-store-and-forward-receipts-presença-e-e2e">c) Store-and-forward, receipts, presença e E2E</a></h3>
+<ul>
+<li><strong>Offline</strong>: a mensagem (já com <code>server_seq</code>) vai para a caixa; quando o
+destinatário reconecta, <code>GET ...?depois_seq=N</code> puxa tudo em ordem — e o
+<code>N</code> vem do último seq entregue <strong>persistido</strong>, não da memória.</li>
+<li><strong>Receipts</strong>: ack do cliente → <code>entregue_em</code>; abrir a conversa →
+<code>lida_em</code>. Uma linha por <code>(conversa, seq, usuario)</code> — o volume cresce com
+o nº de membros e particiona junto com a conversa. Um “lido” em batch
+marca a faixa inteira (<code>&lt;= seq N</code>), não mil linhas.</li>
+<li><strong>Presença</strong>: heartbeat do WebSocket (~30 s) atualiza o Redis com TTL;
+“visto por último” = último heartbeat. Fácil, preciso o suficiente.</li>
+<li><strong>Push</strong>: celular sem socket → APNs/FCM com “mensagem nova”; o corpo
+real só via pull encriptado.</li>
+<li><strong>E2E (alto nível, sem criptografia na entrevista)</strong>: WhatsApp usa o
+<strong>Signal protocol</strong> — sessão por par com ratchet de chaves; para grupos,
+chave de sender keys compartilhada entre os membros. O ponto que você
+fala: <strong>o servidor transporta ciphertext e não lê o conteúdo</strong> — logo não
+indexa texto, não faz busca nem anti-spam sobre o corpo (a busca é
+encriptada no aparelho). O preço disso é arquitetural: a orquestração de
+fan-out, shard e cache opera sobre metadados (remetente, conversa, seq),
+nunca sobre o conteúdo.</li>
+</ul>
+<h3 id="d-sharding-de-conversas"><a class="header" href="#d-sharding-de-conversas">d) Sharding de conversas</a></h3>
+<ul>
+<li>Shard <strong>por <code>conversa_id</code></strong> — é a chave de TODAS as consultas quentes
+(<code>mensagens WHERE conversa_id</code>). 1:1 pode ser uma conversa determinística
+<code>id = min(a,b)_max(a,b)</code> → acha o shard sem índice extra.</li>
+<li>O contador de seq só vive no líder do shard da conversa (transação):
+sharding por conversa dá ordem forte <strong>local</strong>, sem pagar ordenação
+global.</li>
+<li>Grupo gigante é o hot shard: o on-read do item (b) já alivia a escrita —
+sem ele, um grupo de 100k derruba o nó dele.</li>
+<li>Geo: shard por região de quem conversa (mensagem não atravessa oceano para
+ser salva); rebalance com consistent hashing.</li>
+</ul>
+<h2 id="5-trade-offs-e-gargalos"><a class="header" href="#5-trade-offs-e-gargalos">5. Trade-offs e gargalos</a></h2>
+<ul>
+<li><strong>Quebra primeiro:</strong> os gateways WS (estado + 50 M conexões; nó morre →
+reconexão em massa no vizinho) e o banco de mensagens na escrita (230k/s
+<ul>
+<li>receipts).</li>
+</ul>
+</li>
+<li><strong>Sacrifício consciente:</strong> ordem forte por conversa = escritor único por
+shard (escrita da conversa serializa — ok, conversa individual escreve
+pouco); durabilidade por batch (fsync a cada 1–2 s → “confirmado” só o que
+já está no log persistido; ack-after-durable).</li>
+<li><strong>Gateway sticky vs stateless:</strong> conexão WS é longa e tem estado → sticky;
+o preço é failover não-transparente: reconexão rápida + pull do histórico
+(o <code>depois_seq</code> do item c resolve — perder o nó perde o socket, não a
+mensagem).</li>
+<li><strong>Com 10x mais tempo:</strong> busca de mensagens (índice encriptado local),
+mídia em CDN com upload direto por URL assinada (tira os bytes do servidor
+de mensagens), “digitando…” (canal efêmero, sem persistir), chamadas de voz
+(WebRTC, sinal da mensageria), reações (3ª tabela pequena ao lado de
+<code>entregas</code>), status (mensagem 1:N da própria conta).</li>
+<li><strong>Pergunta-bônus comum:</strong> “e se o mesmo usuário está em 2 devices?”
+→ cada device tem sua própria fila de entrega/receipts; o seq da conversa
+é único e os devices sincronizam o ponteiro <code>depois_seq</code>.</li>
+</ul>
+<h2 id="cartão-de-revisão"><a class="header" href="#cartão-de-revisão">Cartão de revisão</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> Narrei em voz alta cronometrado (45 min) · [ ] R1 (+7d) · [ ] R2 (+30d)</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../system-design/rate-limiter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../system-design/news-feed.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../system-design/rate-limiter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../system-design/news-feed.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/fuzzy-data-5ce47f59.js"></script>
+        <script src="../theme/fuzzy-eb9cd58c.js"></script>
+        <script src="../theme/lang-efa6cd37.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

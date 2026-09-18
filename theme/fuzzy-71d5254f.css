@@ -1,0 +1,54 @@
+/* Fuzzy finder estilo Telescope — dark, glow sutil, denso. */
+.fz-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(5, 7, 10, 0.72);
+  backdrop-filter: blur(2px);
+  display: flex; justify-content: center; align-items: flex-start;
+}
+.fz-caixa {
+  margin-top: 12vh; width: min(720px, 92vw);
+  background: #0a0e18;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.12), 0 18px 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+.fz-input {
+  width: 100%; box-sizing: border-box;
+  padding: 14px 16px;
+  background: transparent; border: none; outline: none;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+  color: #e8edf5; font: inherit; font-size: 15px;
+}
+.fz-input::placeholder { color: #4a5568; }
+.fz-lista {
+  list-style: none; margin: 0; padding: 6px 0;
+  max-height: 52vh; overflow-y: auto;
+}
+.fz-item {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 7px 16px; cursor: pointer;
+  color: #8a95a8; font-size: 13px; line-height: 1.4;
+}
+.fz-item.fz-sel {
+  background: rgba(0, 229, 255, 0.08);
+  color: #e8edf5;
+  border-left: 2px solid #00e5ff;
+  padding-left: 14px;
+}
+.fz-titulo { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fz-titulo mark {
+  background: transparent; color: #00e5ff; font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+.fz-meta { display: flex; gap: 10px; align-items: baseline; flex-shrink: 0; }
+.fz-num { color: #4a5568; font-size: 11px; }
+.fz-dif { font-size: 11px; font-weight: 600; }
+.fz-secao { color: #2d3748; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.fz-rodape {
+  padding: 8px 16px;
+  border-top: 1px solid rgba(0, 229, 255, 0.12);
+  color: #4a5568; font-size: 11px;
+  display: flex; justify-content: space-between; gap: 12px;
+}

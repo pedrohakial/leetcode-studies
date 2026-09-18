@@ -1,0 +1,607 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Word Search II - LeetCode &amp; System Design — Rust · C · C++ · Python (EN)</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Technical interview prep: LeetCode patterns in 4 languages + narrated System Design.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/fuzzy-71d5254f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-84cf8a87.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6e2f81ed.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">LeetCode &amp; System Design — Rust · C · C++ · Python (EN)</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="212-word-search-ii-hard"><a class="header" href="#212-word-search-ii-hard">212. Word Search II (Hard)</a></h1>
+<blockquote>
+<p>https://leetcode.com/problems/word-search-ii/ · Topic: Trie + Backtracking</p>
+</blockquote>
+<h2 id="problem-summary"><a class="header" href="#problem-summary">Problem (summary)</a></h2>
+<p>Given an <code>m×n</code> grid of letters and a list <code>words</code>, return every word that
+can be formed from <strong>adjacent</strong> cells (4 directions), each cell used at
+most once per word. Distinct words must come out exactly once; any output
+order works.</p>
+<pre><code>board = [o a a n]  words = ["oath","pea","eat","rain"]  →  ["oath","eat"]
+        [e t a e]
+        [i h k r]
+        [i f l v]
+board = [a b]  words = ["abcb"]  →  []
+        [c d]
+</code></pre>
+<h2 id="pattern--what-to-memorize"><a class="header" href="#pattern--what-to-memorize">Pattern — what to memorize</a></h2>
+<p><strong>A trie of ALL the words + a single grid walk</strong> (not one per word). The
+why: solving “per word” (Word Search I for each word) costs
+<strong>O(W · m·n·3^L)</strong> — W words, for each one m·n starts and up to 3^(L-1)
+branches per cell (4 directions, minus the one you came from). The trie
+<strong>inverts</strong> this: a single DFS per starting cell, and what you walk is the
+SHARED prefix — words with the same beginning are explored together; with
+no shared prefix, the branch dies. Plus <strong>dead-leaf pruning</strong> (a node with
+no children and no word is removed from its parent after being explored) —
+each word can only be found once, so its “dead” leaf is never revisited;
+this brings the real cost well below the worst case. Clue: <em>“word list +
+grid”</em> → building the trie first is the reflex that separates a Hard from
+the pack.</p>
+<h2 id="python"><a class="header" href="#python">Python</a></h2>
+<pre><code class="language-python">class Solution:
+    def findWords(self, board: list[list[str]], words: list[str]) -&gt; list[str]:
+        class NoTrie:
+            def __init__(self):
+                self.filhos: dict[str, NoTrie] = {}
+                self.palavra: str | None = None     # word that ends here
+
+        raiz = NoTrie()
+        for palavra in words:
+            no = raiz
+            for ch in palavra:
+                no = no.filhos.setdefault(ch, NoTrie())
+            no.palavra = palavra
+
+        resp: list[str] = []
+        m, n = len(board), len(board[0])
+
+        def dfs(i: int, j: int, no: NoTrie) -&gt; None:
+            if no.palavra is not None:
+                resp.append(no.palavra)
+                no.palavra = None                    # don't repeat the word
+            if not no.filhos:
+                return                               # leaf: nothing to explore
+            original = board[i][j]
+            board[i][j] = '#'                        # mark visited
+            for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                ni, nj = i + di, j + dj
+                if 0 &lt;= ni &lt; m and 0 &lt;= nj &lt; n:
+                    letra = board[ni][nj]
+                    filho = no.filhos.get(letra)
+                    if filho is not None:
+                        dfs(ni, nj, filho)
+                        if not filho.filhos and filho.palavra is None:
+                            del no.filhos[letra]     # prune dead leaf
+            board[i][j] = original
+
+        for i in range(m):
+            for j in range(n):
+                letra = board[i][j]
+                filho = raiz.filhos.get(letra)
+                if filho is not None:
+                    dfs(i, j, filho)
+                    if not filho.filhos and filho.palavra is None:
+                        del raiz.filhos[letra]
+        return resp
+</code></pre>
+<h2 id="rust"><a class="header" href="#rust">Rust</a></h2>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Default)]
+struct NoTrie212 {
+    filhos: [Option&lt;Box&lt;NoTrie212&gt;&gt;; 26],
+    palavra: Option&lt;String&gt;,
+}
+
+impl Solution {
+    pub fn find_words(board: Vec&lt;Vec&lt;char&gt;&gt;, words: Vec&lt;String&gt;) -&gt; Vec&lt;String&gt; {
+        let mut raiz = NoTrie212::default();
+        for palavra in &amp;words {
+            let mut no = &amp;mut raiz;
+            for &amp;b in palavra.as_bytes() {
+                let i = (b - b'a') as usize;
+                no = no.filhos[i].get_or_insert_with(|| Box::new(NoTrie212::default()));
+            }
+            no.palavra = Some(palavra.clone());
+        }
+
+        let mut resp = Vec::new();
+        let mut tab = board;
+        let (m, n) = (tab.len(), tab[0].len());
+        let dirs = [(1i32, 0i32), (-1, 0), (0, 1), (0, -1)];
+
+        fn dfs(
+            i: usize,
+            j: usize,
+            no: &amp;mut NoTrie212,
+            tab: &amp;mut Vec&lt;Vec&lt;char&gt;&gt;,
+            m: usize,
+            n: usize,
+            dirs: &amp;[(i32, i32)],
+            resp: &amp;mut Vec&lt;String&gt;,
+        ) {
+            if let Some(p) = no.palavra.take() {
+                resp.push(p); // word found: don't repeat it (take)
+            }
+            if no.filhos.iter().all(|f| f.is_none()) {
+                return; // dead leaf (will be pruned by the parent)
+            }
+            let original = tab[i][j];
+            tab[i][j] = '#';
+            for &amp;(di, dj) in dirs {
+                let ni = i as i32 + di;
+                let nj = j as i32 + dj;
+                if ni &lt; 0 || nj &lt; 0 || ni &gt;= m as i32 || nj &gt;= n as i32 {
+                    continue;
+                }
+                let (ni, nj) = (ni as usize, nj as usize);
+                let letra = tab[ni][nj];
+                if letra == '#' {
+                    continue; // cell already visited on this path
+                }
+                let idx = (letra as u8 - b'a') as usize;
+                let podar = if let Some(filho) = no.filhos[idx].as_mut() {
+                    dfs(ni, nj, filho, tab, m, n, dirs, resp);
+                    filho.filhos.iter().all(|f| f.is_none()) &amp;&amp; filho.palavra.is_none()
+                } else {
+                    false
+                };
+                if podar {
+                    no.filhos[idx] = None; // dead-leaf pruning
+                }
+            }
+            tab[i][j] = original;
+        }
+
+        for i in 0..m {
+            for j in 0..n {
+                let letra = tab[i][j];
+                let idx = (letra as u8 - b'a') as usize;
+                let podar = if let Some(filho) = raiz.filhos[idx].as_mut() {
+                    dfs(i, j, filho, &amp;mut tab, m, n, &amp;dirs, &amp;mut resp);
+                    filho.filhos.iter().all(|f| f.is_none()) &amp;&amp; filho.palavra.is_none()
+                } else {
+                    false
+                };
+                if podar {
+                    raiz.filhos[idx] = None;
+                }
+            }
+        }
+        resp
+    }
+}
+<span class="boring">}</span></code></pre>
+<h2 id="c"><a class="header" href="#c">C++</a></h2>
+<pre><code class="language-cpp">#include &lt;string&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class Solution {
+public:
+    vector&lt;string&gt; findWords(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;string&gt;&amp; words) {
+        for (const string&amp; palavra : words) {
+            No* no = &amp;raiz;
+            for (char ch : palavra) {
+                int i = ch - 'a';
+                if (!no-&gt;filhos[i]) no-&gt;filhos[i] = new No();
+                no = no-&gt;filhos[i];
+            }
+            no-&gt;palavra = palavra; // word that ends here
+        }
+        vector&lt;string&gt; resp;
+        int m = (int)board.size(), n = (int)board[0].size();
+        for (int i = 0; i &lt; m; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                char letra = board[i][j];
+                No* filho = raiz.filhos[letra - 'a'];
+                if (filho) {
+                    dfs(i, j, filho, board, resp);
+                    if (morta(filho)) raiz.filhos[letra - 'a'] = nullptr; // prune
+                }
+            }
+        }
+        return resp;
+    }
+
+private:
+    struct No {
+        No* filhos[26] = {};
+        string palavra; // empty = not a word end; non-empty = complete word
+        ~No() {
+            for (auto* f : filhos) delete f;
+        }
+    };
+    No raiz;
+
+    static bool morta(const No* no) {
+        for (auto* f : no-&gt;filhos)
+            if (f) return false;
+        return no-&gt;palavra.empty();
+    }
+
+    static void dfs(int i, int j, No* no, vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;string&gt;&amp; resp) {
+        if (!no-&gt;palavra.empty()) {
+            resp.push_back(no-&gt;palavra);
+            no-&gt;palavra.clear(); // word already collected: don't repeat
+        }
+        if (morta(no)) return; // dead leaf (will be pruned by the parent)
+        int m = (int)board.size(), n = (int)board[0].size();
+        char original = board[i][j];
+        board[i][j] = '#';
+        int dirs[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (auto&amp; d : dirs) {
+            int ni = i + d[0], nj = j + d[1];
+            if (ni &lt; 0 || nj &lt; 0 || ni &gt;= m || nj &gt;= n) continue;
+            char letra = board[ni][nj];
+            if (letra == '#') continue; // already visited on this path
+            No* filho = no-&gt;filhos[letra - 'a'];
+            if (filho) {
+                dfs(ni, nj, filho, board, resp);
+                if (morta(filho)) no-&gt;filhos[letra - 'a'] = nullptr; // prune
+            }
+        }
+        board[i][j] = original;
+    }
+};
+</code></pre>
+<h2 id="c-1"><a class="header" href="#c-1">C</a></h2>
+<pre><code class="language-c">#include &lt;stdbool.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+typedef struct NoTrie212 {
+    struct NoTrie212* filhos[26];
+    const char* palavra; /* word that ends here; NULL = not a word end */
+} NoTrie212;
+
+typedef struct {
+    NoTrie212 raiz;
+} Trie212;
+
+static NoTrie212* trie_no_novo(void) {
+    return (NoTrie212*)calloc(1, sizeof(NoTrie212));
+}
+
+static bool trie_morta(const NoTrie212* no) {
+    if (no-&gt;palavra) return false;
+    for (int i = 0; i &lt; 26; i++)
+        if (no-&gt;filhos[i]) return false;
+    return true;
+}
+
+static char* duplicar(const char* s) {
+    size_t n = strlen(s);
+    char* copia = (char*)malloc(n + 1);
+    memcpy(copia, s, n + 1);
+    return copia;
+}
+
+static void busca212(int i, int j, NoTrie212* no, char** tab, int m, int n,
+                     char** resp, int* returnSize) {
+    if (no-&gt;palavra) {
+        resp[(*returnSize)++] = duplicar(no-&gt;palavra);
+        no-&gt;palavra = NULL; /* don't repeat the word */
+    }
+    if (trie_morta(no)) return; /* dead leaf (pruned by the parent) */
+    char original = tab[i][j];
+    tab[i][j] = '#';
+    int dirs[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    for (int d = 0; d &lt; 4; d++) {
+        int ni = i + dirs[d][0], nj = j + dirs[d][1];
+        if (ni &lt; 0 || nj &lt; 0 || ni &gt;= m || nj &gt;= n) continue;
+        unsigned char letra = (unsigned char)tab[ni][nj];
+        if (letra == '#') continue; /* already visited on this path */
+        NoTrie212* filho = no-&gt;filhos[letra - 'a'];
+        if (filho) {
+            busca212(ni, nj, filho, tab, m, n, resp, returnSize);
+            if (trie_morta(filho)) no-&gt;filhos[letra - 'a'] = NULL; /* prune */
+        }
+    }
+    tab[i][j] = original;
+}
+
+static void trie_liberar(NoTrie212* no) {
+    for (int i = 0; i &lt; 26; i++)
+        if (no-&gt;filhos[i]) trie_liberar(no-&gt;filhos[i]);
+    free(no);
+}
+
+char** findWords(char** board, int boardSize, int* boardColSize,
+                 char** words, int wordsSize, int* returnSize) {
+    Trie212 trie;
+    memset(&amp;trie, 0, sizeof(trie));
+    for (int w = 0; w &lt; wordsSize; w++) {
+        NoTrie212* no = &amp;trie.raiz;
+        for (char* c = words[w]; *c; c++) {
+            int i = (unsigned char)*c - 'a';
+            if (!no-&gt;filhos[i]) no-&gt;filhos[i] = trie_no_novo();
+            no = no-&gt;filhos[i];
+        }
+        no-&gt;palavra = words[w]; /* points to the original string (lives here) */
+    }
+
+    char** resp = (char**)malloc(wordsSize * sizeof(char*));
+    *returnSize = 0;
+    for (int i = 0; i &lt; boardSize; i++) {
+        for (int j = 0; j &lt; boardColSize[i]; j++) {
+            unsigned char letra = (unsigned char)board[i][j];
+            NoTrie212* filho = trie.raiz.filhos[letra - 'a'];
+            if (filho) {
+                busca212(i, j, filho, board, boardSize, boardColSize[0],
+                         resp, returnSize);
+                if (trie_morta(filho)) trie.raiz.filhos[letra - 'a'] = NULL; /* prune */
+            }
+        }
+    }
+    for (int i = 0; i &lt; 26; i++)
+        if (trie.raiz.filhos[i]) trie_liberar(trie.raiz.filhos[i]);
+    return resp;
+}
+</code></pre>
+<h2 id="complexity"><a class="header" href="#complexity">Complexity</a></h2>
+<ul>
+<li>Trie build: <strong>O(Σ|words|)</strong> — each letter of each word becomes a node
+(worst case).</li>
+<li>Search: worst case <strong>O(m · n · 4 · 3^(L-1))</strong>, L = longest word — each
+cell starts a DFS that branches into ≤ 4 and continues in ≤ 3 directions
+(the one it came from doesn’t return). <strong>Without the trie</strong> (Word Search
+I per word) it would be <strong>O(W · m·n·3^L)</strong> — the W factor disappears.
+With dead-leaf pruning the practical cost is much lower (branches with no
+shared prefix die on the first pass).</li>
+<li>Space: <strong>O(26 · Σ|words|)</strong> for the trie + <strong>O(m·n)</strong> of visited (the
+<code>'#'</code> marker is in-place) + O(L) of the DFS stack.</li>
+</ul>
+<h2 id="pitfalls"><a class="header" href="#pitfalls">Pitfalls</a></h2>
+<ul>
+<li><strong>The <code>'#'</code> guard is MANDATORY outside Python</strong>: <code>dict.get('#')</code> returns
+<code>None</code> and protects on its own, but in Rust/C++/C indexing a visited
+cell <code>'#' - 'a'</code> blows past the array (index 194, panic/UB) — the real
+bug this code once had, fixed with <code>if letra == '#' { continue; }</code>
+before the index.</li>
+<li><strong>Duplicate words come out ONCE</strong>: zero out <code>no.palavra</code>
+(take/clear/NULL) at collection time — without it, the same path would
+find the word again.</li>
+<li>Restore the board: <code>original = tab[i][j]; tab[i][j] = '#'; ...; tab[i][j] = original;</code> on ALL returns — skipping the restoration
+contaminates the DFS’s sibling paths.</li>
+<li>Dead-leaf pruning: only after exploring the child; a node whose <code>palavra</code>
+is still pending MUST NOT be pruned (<code>morta()</code> requires an empty <code>palavra</code>
+too).</li>
+<li>C: the answer is allocated with <code>wordsSize</code> pointers (a ceiling of
+distinct words) and each word is <strong>copied</strong> (<code>duplicar</code>) — the trie
+stores pointers into <code>words</code>, which the judge doesn’t free first.</li>
+<li>Output order is free — LeetCode’s tests compare sets; don’t waste a
+sort.</li>
+</ul>
+<h2 id="review-card"><a class="header" href="#review-card">Review card</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> R1 (+1d) · [ ] R2 (+3d) · [ ] R3 (+7d, another language) · [ ] R4 (+21d) · [ ] R5 (+60d)</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../trie/design-add-and-search-words.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../heap/kth-largest-element-in-a-stream.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../trie/design-add-and-search-words.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../heap/kth-largest-element-in-a-stream.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/fuzzy-data-f9cdf09b.js"></script>
+        <script src="../theme/fuzzy-eb9cd58c.js"></script>
+        <script src="../theme/lang-efa6cd37.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
